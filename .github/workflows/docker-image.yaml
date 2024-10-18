@@ -31,4 +31,4 @@ jobs:
           # login to docker hub (using secret) and push the image
         run: |
           echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
-          docker push langbledsoe/docker-exercise:latest
+          docker push langbledsoe/docker-exercise:latest 
