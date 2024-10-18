@@ -26,13 +26,9 @@ jobs:
       - name: run tests
         # uses: liatrio/github-actions/apprentice-action@master
         uses: LangBledsoe/github-actions-copy/apprentice-action@main
-
-#    if: success()
-#    steps:
-#      - name: checkout
-#        uses: actions/checkout@v4
-#      - name: push image to docker hub
-#        # login to docker hub (using secret) and push the image
-#        run: |
-#         echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
-#          docker push langbledsoe/docker-exercise:latest
+      - name: push image to docker hub
+        if: success()
+          # login to docker hub (using secret) and push the image
+        run: |
+          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
+          docker push langbledsoe/docker-exercise:latest
