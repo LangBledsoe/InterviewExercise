@@ -41,7 +41,8 @@ env:
   PROJECT_ID: 'liatrio-439009' # TODO: update to your Google Cloud project ID
   REGION: 'us-central1' # TODO: update to your region
   SERVICE: 'docker-exercise' # TODO: update to your service name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo' # TODO: update to your workload identity provider
+ # WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo' # TODO: update to your workload identity provider
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/liatrio-439009/locations/global/workloadIdentityPools/github/providers/my-repo' # TODO: update to your workload identity provider
   IMAGE_NAME: langbledsoe/docker-exercise:latest
 
 jobs:
@@ -65,7 +66,7 @@ jobs:
         uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
         with:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
-          project_id: '${{ env.PROJECT_ID }}'
+        #  project_id: '${{ env.PROJECT_ID }}'
 
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
