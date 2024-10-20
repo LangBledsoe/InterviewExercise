@@ -8,34 +8,38 @@ name: "Deploy to Google Cloud Run"
 on:
   [workflow_dispatch]
 
-jobs:  
-  deploy:  
-    runs-on: ubuntu-latest  
-    steps:  
-      - name: Checkout code  
-        uses: actions/checkout@v2  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Google Cloud SDK  
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-        with:  
-          project_id: liatrio-439009  
-          service_account_key: ${{ secrets.GCP_SA_KEY }}  
-          export_default_credentials: true  
+        with:
+          project_id: liatrio-439009
 
-      - name: Pull Docker image from Docker Hub  
-        run: docker pull langbledsoe/docker-exercise:latest  
+      - name: Pull Docker image from Docker Hub
+        run: docker pull langbledsoe/docker-exercise:latest
 
-      - name: Tag Docker image for GCR  
-        run: docker tag langbledsoe/docker-exercise:latest gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest  
+      - name: Tag Docker image for GCR
+        run: docker tag langbledsoe/docker-exercise:latest gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
 
-      - name: Push Docker image to GCR  
-        run: docker push gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest  
+      - name: Push Docker image to GCR
+        run: docker push gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
 
-      - name: Deploy to Cloud Run  
-        uses: google-github-actions/deploy-cloudrun@main  
-        with:  
-          image: gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest  
-          service: docker-exercise  
-          region: us-central1  
-          platform: managed  
-          allow-unauthenticated: true  
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          image: gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
+          service: docker-exercise
+          region: us-central1
+          platform: managed
+          allow-unauthenticated: true
