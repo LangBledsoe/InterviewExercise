@@ -41,7 +41,7 @@ env:
   PROJECT_ID: 'liatrio-439009' # TODO: update to your Google Cloud project ID
   REGION: 'us-central1' # TODO: update to your region
   SERVICE: 'docker-exercise' # TODO: update to your service name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/413455225733/locations/global/workloadIdentityPools/github' # TODO: update to your workload identity provider
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo' # TODO: update to your workload identity provider
   IMAGE_NAME: langbledsoe/docker-exercise:latest
 
 jobs:
