@@ -24,7 +24,7 @@ jobs:
         run: |
           docker build . -t langbledsoe/docker-exercise:latest
           docker run -d -p 80:80 langbledsoe/docker-exercise:latest
-          sleep 10
+        #  sleep 10 # TRYING TO REMOVE THE SLEEP
       - name: run tests
         # uses: liatrio/github-actions/apprentice-action@master
         uses: LangBledsoe/github-actions-copy/apprentice-action@main
