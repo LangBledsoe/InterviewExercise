@@ -32,6 +32,12 @@ jobs:
       - name: Tag Docker image for GCR
         run: docker tag langbledsoe/docker-exercise:latest gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
 
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker
+        
+      - name: Push Docker image to GCR
+        run: docker push gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
+
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
