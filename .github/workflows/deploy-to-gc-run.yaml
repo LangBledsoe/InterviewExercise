@@ -25,6 +25,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: liatrio-439009
+      
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
 
       - name: Pull Docker image from Docker Hub
         run: docker pull langbledsoe/docker-exercise:latest
