@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+// Set the port for the server to listen on
+// Either from an environment variable or default to port 80
 const port = process.env.PORT || 80
 
 app.get('/', (req, res) => {
