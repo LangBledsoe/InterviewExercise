@@ -45,3 +45,4 @@ jobs:
           image: gcr.io/liatrio-439009/langbledsoe/docker-exercise:latest
           service: docker-exercise
           region: us-central1
+          flags: '--allow-unauthenticated'
