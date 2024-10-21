@@ -20,7 +20,7 @@
         - name: build image and run container
           run: |
             docker build . -t langbledsoe/docker-exercise:latest
-            docker run -d -p 80:80 langbledsoe/docker-exercise:latest
+            docker run -d -p 80:80 langbledsoe/docker-exercise:latest 
 
         # Specific SHA for the commit before the broken test was introduced:
         - name: run tests
