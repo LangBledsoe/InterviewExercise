@@ -1,5 +1,6 @@
-# Specify the node base image with your desired version node:<version>
-# Each Dockerfile must begin with a FROM instuciton
+# Specify the base image as node with your desired version
+# Each Dockerfile must begin with a FROM instruction
+# A base image contains all the pre-configured files and settings needed for a specific environment
 FROM node:16
 
 # The app directory created to be used as the location within the container
@@ -7,13 +8,13 @@ FROM node:16
 WORKDIR /usr/src/app
 
 # Copies package.json and package-lock.json to the directory I made
-# Installs dependencies first, since it makes rebuilding the container go faster
 COPY package*.json ./
 
-# Installs app dependencies
+# Installs app dependencies specified in package.json
+# Also installs any required Node modules
 RUN npm install
 
-# Bundles the app's source code to the directory I made
+# Copy all other files from the local project directory to the container
 COPY . .
 
 # Expose the port the app runs on

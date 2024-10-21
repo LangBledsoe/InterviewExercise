@@ -3,11 +3,11 @@ const app = express()
 const port = process.env.PORT || 80
 
 app.get('/', (req, res) => {
-  //res.send('Hello World!')
   const response = {
     message: "My name is Lang Bledsoe",
     timestamp: Date.now(),
 };
+
 res.send(JSON.stringify(response));
 })
 

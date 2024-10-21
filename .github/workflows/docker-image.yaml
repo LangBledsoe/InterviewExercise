@@ -1,38 +1,33 @@
-# Name of the action 
-name: Build, Verify, and Push Docker Image
+  name: Build, Verify, and Push Docker Image
 
-# A trigger for when this action will run
-on:  
-  push:  
-    branches:  
-      - main  
+  # A trigger for when this action will run
+  on:  
+    push:  
+      branches:  
+        - main  
 
-jobs:
-  one-big-job:
-    # runs on a ubuntu vm provided by github
-    runs-on: ubuntu-latest
-    # each step the job completes
-    # it can run commands, run setup taks, run an action, etc
-    steps:
-      # the name of the first step
-      - name: checkout
-        # reference the major version of a release
-        uses: actions/checkout@v4
-      # the name of the second step
-      - name: build image
+  jobs:
+    one-big-job:
+      # runs on a ubuntu vm provided by github
+      runs-on: ubuntu-latest
+      
+      steps:
+        # Downloads the repo onto the vm
+        - name: checkout repo
+          uses: actions/checkout@v4
+
         # build the docker image and container
-        run: |
-          docker build . -t langbledsoe/docker-exercise:latest
-          docker run -d -p 80:80 langbledsoe/docker-exercise:latest
-        #  sleep 10 # TRYING TO REMOVE THE SLEEP
-      - name: run tests
-        # uses: liatrio/github-actions/apprentice-action@master
-        # uses: LangBledsoe/github-actions-copy/apprentice-action@main
+        - name: build image and run container
+          run: |
+            docker build . -t langbledsoe/docker-exercise:latest
+            docker run -d -p 80:80 langbledsoe/docker-exercise:latest
+
         # Specific SHA for the commit before the broken test was introduced:
-        uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
-      - name: push image to docker hub
-        if: success()
-          # login to docker hub (using secret) and push the image
-        run: |
-          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
-          docker push langbledsoe/docker-exercise:latest 
+        - name: run tests
+          uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
+
+        - name: push image to docker hub
+          if: success()
+          run: |
+            echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
+            docker push langbledsoe/docker-exercise:latest 

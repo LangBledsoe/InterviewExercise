@@ -1,9 +1,12 @@
 name: "Deploy to Google Cloud Run"
 
-on:  
-  workflow_run:
-    workflows: ['Build, Verify, and Push Docker Image']
-    types: [completed]
+#on:  
+#  workflow_run:
+#    workflows: ['Build, Verify, and Push Docker Image']
+#    types: [completed]
+
+on:
+  [workflow_dispatch]
 
 jobs:
   deploy:
