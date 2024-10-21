@@ -2,7 +2,7 @@
 
   # A trigger for when this action will run
   on:  
-    push:  
+    push:   
       branches:  
         - main  
 
