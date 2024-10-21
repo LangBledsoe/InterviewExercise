@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
   const response = {
     message: "My name is Lang Bledsoe",
     timestamp: Date.now(),
-    message2: "Update Test :)"
+    demo: true
 };
 res.send(JSON.stringify(response));
 })
