@@ -7,8 +7,7 @@ const port = process.env.PORT || 80
 app.get('/', (req, res) => {
   const response = {
     message: "My name is Lang Bledsoe",
-    timestamp: Date.now(),
-    demo: true
+    timestamp: Date.now()
 };
 
 res.send(JSON.stringify(response));
