@@ -3,7 +3,7 @@
   # A trigger for when this action will run
   on:  
     push:   
-      branches:  
+      branches:   
         - main  
 
   jobs:
