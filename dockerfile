@@ -23,4 +23,4 @@ EXPOSE 80
 
 # The command that gets run when the container is ready
 # Each value in the array is a seperate argument in the command line
-CMD ["node", "index.js"]
+CMD ["node", "app.js"]
